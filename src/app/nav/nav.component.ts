@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 @Component({
-  selector: 'nav',
+  selector: 'app-nav-bar',
   template: `
     <mat-sidenav-container class="sidenav-container">
       <mat-sidenav
@@ -41,7 +41,7 @@ import { map } from 'rxjs/operators';
     .sidenav-container {
       height: 100%;
     }
-    
+
     .sidenav {
       width: 200px;
       box-shadow: 3px 0 6px rgba(0,0,0,.24);
@@ -55,7 +55,7 @@ export class NavComponent {
     .pipe(
       map(result => result.matches)
     );
-    
+
   constructor(private breakpointObserver: BreakpointObserver) {}
-  
+
   }
