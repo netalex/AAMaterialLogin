@@ -3,7 +3,7 @@ import { MatPaginator, MatSort } from '@angular/material';
 import { DataResultDataSource } from './data-result-datasource';
 
 @Component({
-  selector: 'data-result',
+  selector: 'app-data-result',
   templateUrl: './data-result.component.html',
   styleUrls: ['./data-result.component.css']
 })

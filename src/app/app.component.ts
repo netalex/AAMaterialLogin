@@ -3,10 +3,16 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'app-root',
   template: `
-    router outlet: there
-    <router-outlet></router-outlet>
+  <mat-toolbar color="primary">
+  <span><h1>Angular material login</h1></span>
+  </mat-toolbar>
+
+  <router-outlet></router-outlet>
   `,
-  styles: []
+  styles: [
+    `
+    `
+  ]
 })
 export class AppComponent {
   title = 'app';
