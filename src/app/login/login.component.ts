@@ -10,7 +10,6 @@ import { FormControl } from '@angular/forms';
   template: `
 
   <mat-card class="half-width center">
-
       <mat-grid-list cols="1" rowHeight="100px" class="center">
         <mat-grid-tile>
           <mat-form-field class='full-width'>
@@ -24,7 +23,6 @@ import { FormControl } from '@angular/forms';
         </mat-grid-tile>
       </mat-grid-list>
     </mat-card>
-
   `,
   styles: [
     `
