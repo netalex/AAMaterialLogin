@@ -48,8 +48,3 @@ export class LoginComponent implements OnInit {
   }
 
 }
-
-
-// <!--- <mat-form-field>
-// <input type="password" placeholder="Password">
-// </mat-form-field>-->

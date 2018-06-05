@@ -45,6 +45,8 @@ export class DataResultComponent implements OnInit {
   displayedColumns = ['id', 'name'];
 
   ngOnInit() {
-    this.dataSource = new DataResultDataSource(this.paginator, this.sort);
+    // this.dataSource = new DataResultDataSource(this.paginator, this.sort);
+    this.dataSource = new DataResultDataSource();
+    console.log(this.dataSource);
   }
 }

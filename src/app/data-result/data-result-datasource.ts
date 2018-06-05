@@ -1,48 +1,83 @@
-import { DataSource } from '@angular/cdk/collections';
+// import { DataSource } from '@angular/cdk/collections';
 import { MatPaginator, MatSort } from '@angular/material';
 import { map } from 'rxjs/operators';
 import { Observable, of as observableOf, merge } from 'rxjs';
 
+
+import * as jsonData from '../resources/dataStructure.json';
+
 // TODO: Replace this with your own data model type
 export interface DataResultItem {
-  name: string;
-  id: number;
+  dep: {
+    id: number;
+    name: string;
+    prods: {
+      productName: string;
+      productImageUrl: string;
+    }
+  };
 }
 
 // TODO: replace this with real data from your application
-const EXAMPLE_DATA: DataResultItem[] = [
-  {id: 1, name: 'Hydrogen'},
-  {id: 2, name: 'Helium'},
-  {id: 3, name: 'Lithium'},
-  {id: 4, name: 'Beryllium'},
-  {id: 5, name: 'Boron'},
-  {id: 6, name: 'Carbon'},
-  {id: 7, name: 'Nitrogen'},
-  {id: 8, name: 'Oxygen'},
-  {id: 9, name: 'Fluorine'},
-  {id: 10, name: 'Neon'},
-  {id: 11, name: 'Sodium'},
-  {id: 12, name: 'Magnesium'},
-  {id: 13, name: 'Aluminum'},
-  {id: 14, name: 'Silicon'},
-  {id: 15, name: 'Phosphorus'},
-  {id: 16, name: 'Sulfur'},
-  {id: 17, name: 'Chlorine'},
-  {id: 18, name: 'Argon'},
-  {id: 19, name: 'Potassium'},
-  {id: 20, name: 'Calcium'},
-];
+// this.http.get<Example>('../resources/dataStructure.json')
+
+console.log(jsonData);
+console.log(jsonData.default.data);
+const stringData = JSON.stringify(jsonData);
+const data = jsonData.default;
+console.log(stringData);
+
+/* const EXAMPLE_DATA: DataResultItem[] = [
+  {
+    dep: data.data.dep,
+    {
+      id: data.dep.
+    }
+  }
+]; */
+// const EXAMPLE_DATA: DataResultItem[] = [
+  // {dep.id: 1, name: 'Hydrogen'},
+  // {id: 2, name: 'Helium'},
+  // {id: 3, name: 'Lithium'},
+  // {id: 4, name: 'Beryllium'},
+  // {id: 5, name: 'Boron'},
+  // {id: 6, name: 'Carbon'},
+  // {id: 7, name: 'Nitrogen'},
+  // {id: 8, name: 'Oxygen'},
+  // {id: 9, name: 'Fluorine'},
+  // {id: 10, name: 'Neon'},
+  // {id: 11, name: 'Sodium'},
+  // {id: 12, name: 'Magnesium'},
+  // {id: 13, name: 'Aluminum'},
+  // {id: 14, name: 'Silicon'},
+  // {id: 15, name: 'Phosphorus'},
+  // {id: 16, name: 'Sulfur'},
+  // {id: 17, name: 'Chlorine'},
+  // {id: 18, name: 'Argon'},
+  // {id: 19, name: 'Potassium'},
+  // {id: 20, name: 'Calcium'},
+  // {
+  //   dep: {
+  //     id: 'pippo'
+  //   }
+  // }
+// ];
 
 /**
  * Data source for the DataResult view. This class should
  * encapsulate all logic for fetching and manipulating the displayed data
  * (including sorting, pagination, and filtering).
  */
-export class DataResultDataSource extends DataSource<DataResultItem> {
-  data: DataResultItem[] = EXAMPLE_DATA;
+export class DataResultDataSource /* extends DataSource<DataResultItem> */ {
+  let pippo: string =;
+  data: DataResultItem[] = pippo;
 
-  constructor(private paginator: MatPaginator, private sort: MatSort) {
-    super();
+  constructor(/* private paginator: MatPaginator, private sort: MatSort */) {
+    // super();
+  }
+
+  connect() {
+    return this.data;
   }
 
   /**
@@ -50,59 +85,60 @@ export class DataResultDataSource extends DataSource<DataResultItem> {
    * the returned stream emits new items.
    * @returns A stream of the items to be rendered.
    */
-  connect(): Observable<DataResultItem[]> {
-    // Combine everything that affects the rendered data into one update
-    // stream for the data-table to consume.
-    const dataMutations = [
-      observableOf(this.data),
-      this.paginator.page,
-      this.sort.sortChange
-    ];
+  // connect(): Observable<DataResultItem[]> {
+  //   // Combine everything that affects the rendered data into one update
+  //   // stream for the data-table to consume.
+  //   const dataMutations = [
+  //     observableOf(this.data),
+  //     this.paginator.page,
+  //     this.sort.sortChange
+  //   ];
 
-    // Set the paginators length
-    this.paginator.length = this.data.length;
+  //   // Set the paginators length
+  //   this.paginator.length = this.data.length;
 
-    return merge(...dataMutations).pipe(map(() => {
-      return this.getPagedData(this.getSortedData([...this.data]));
-    }));
-  }
+  //   return merge(...dataMutations).pipe(map(() => {
+  //     return this.getPagedData(this.getSortedData([...this.data]));
+  //   }));
+  // }
 
   /**
    *  Called when the table is being destroyed. Use this function, to clean up
    * any open connections or free any held resources that were set up during connect.
    */
-  disconnect() {}
+  // disconnect() {}
 
   /**
    * Paginate the data (client-side). If you're using server-side pagination,
    * this would be replaced by requesting the appropriate data from the server.
    */
-  private getPagedData(data: DataResultItem[]) {
+/*   private getPagedData(data: DataResultItem[]) {
     const startIndex = this.paginator.pageIndex * this.paginator.pageSize;
     return data.splice(startIndex, this.paginator.pageSize);
-  }
+  } */
 
   /**
    * Sort the data (client-side). If you're using server-side sorting,
    * this would be replaced by requesting the appropriate data from the server.
    */
-  private getSortedData(data: DataResultItem[]) {
+/*   private getSortedData(data: DataResultItem[]) {
     if (!this.sort.active || this.sort.direction === '') {
       return data;
     }
 
     return data.sort((a, b) => {
       const isAsc = this.sort.direction === 'asc';
-      switch (this.sort.active) {
-        case 'name': return compare(a.name, b.name, isAsc);
-        case 'id': return compare(+a.id, +b.id, isAsc);
-        default: return 0;
-      }
+      return 'Pippo';
+      // switch (this.sort.active) {
+      //   case 'name': return compare(a.name, b.name, isAsc);
+      //   case 'id': return compare(+a.id, +b.id, isAsc);
+      //   default: return 0;
+      // }
     });
-  }
+  } */
 }
 
 /** Simple sort comparator for example ID/Name columns (for client-side sorting). */
-function compare(a, b, isAsc) {
+/* function compare(a, b, isAsc) {
   return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
-}
+} */
